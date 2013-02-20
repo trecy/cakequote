@@ -34,7 +34,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	
 	public $components = array(
-		'session',
+		'Session',
 		'Auth'	=> array(
 			'loginRedirect'  => array('controller' => 'quotes', 'action' => 'index'),
 			'logoutRedirect' => array('controller' => 'quotes', 'action' => 'index')
@@ -55,5 +55,10 @@ class AppController extends Controller {
 		else{
 			$this->set('me','non connecté');
 		}
+	}
+	public function isAuthorized($user){
+		
+		
+		//default : securité
 	}
 }
