@@ -6,62 +6,77 @@ App::uses('AppController', 'Controller');
  * @property User $User
  */
 class UsersController extends AppController {
-	
-		
-	
+
+
+
 	public function beforeFilter(){
+
+		/**
+		 * beforeFilter
+		 *
+		 * @author gasp
+		 **/
+
 		parent::beforeFilter();
 		$this->Auth->allow('add');
+		$this->Auth->allow('logout');
+
 	}
-	
-	
+
+
 	public function isAuthorized($user){
-		
-		if($this->action == 'delete'){
-			return false;
-		}
-		
-			if($this->action == 'edit'){
-			
-				//user/edit/6 , id is 6
-				$id = $this->request->params['pass'][0];
-			
-				if(isset($user['id']) && $user['id'] == $id){
-					return true;
-				}
-				else{
-					$this->Session->setFlash('patit hackr de merde');
-					return false;
-				}
+
+		if($this->action == 'delete'  && $user['id'] ==1) {
+ 	 	   return true;
+ 	 	}
+
+
+		if($this->action == 'edit'){
+
+			//users/edit/6 id is 6
+			$id = $this->request->params['pass'][0];
+
+			if(isset($user['id']) && $user['id'] == $id){
+				return true;
 			}
-		
-		
+			else {
+				$this->Session->setFlash('petit hacker de merde');
+				return false;
+			}
+		}
+
+
 		return parent::isAuthorized($user);
 	}
-	
+
+
 	/**
-	*login and logout
-	*/
+	 * login and logout
+	 *
+	 * @author gasp
+	 **/
 	
 	public function login(){
-		if ($this->request->is('post')){
-			if($this->Auth->login()){
+
+		if($this->request->is('post')) {
+			if ($this->Auth->login()) {
 				$this->redirect($this->Auth->redirect());
 			}
-			else{
-				$this->Session->setFlash('Invalid password');
+			else {
+				$this->Session->setFlash(__('Invalid username or password'));
 			}
 		}
-		
-		
-	}
 
+	}
 
 	public function logout(){
-		$this->redirect(
-		$this->Auth->logout()
-	);
+
+		$this->Auth->logout();
+		$this->Session->setFlash("Vous êtes maintenant déconnecté");
+		$this->redirect('/');
 	}
+
+
 
 /**
  * index method

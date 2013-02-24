@@ -19,28 +19,6 @@ class GroupsController extends AppController {
 
 
 /**
- * delete method
- *
- * @throws NotFoundException
- * @throws MethodNotAllowedException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->Group->id = $id;
-		if (!$this->Group->exists()) {
-			throw new NotFoundException(__('Invalid group'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Group->delete()) {
-			$this->Session->setFlash(__('Group deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Group was not deleted'));
-		$this->redirect(array('action' => 'index'));
-	}
-
-/**
  * admin_index method
  *
  * @return void

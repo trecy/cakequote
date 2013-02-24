@@ -18,7 +18,8 @@
 <body>
 	<div id="container">
 		<div id="header" class="admin">
-			<h1>admin:<?php echo $this->Html->link('cakequote', '/'); ?></h1>
+			<h1>admin:<?php echo $this->Html->link('Administration'); ?></h1>
+			<h2><?php echo $this->Html->link('Se déconnecter', array('controller'=>'users','action'=>'logout','admin'=>false)); ?></h2>
 		</div>
 		<div id="content">
 

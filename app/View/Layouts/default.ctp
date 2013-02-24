@@ -38,9 +38,37 @@
 	<div id="container">
 		<div id="header">
 			<h1><?php echo $this->Html->link('cakequote', '/'); ?></h1>
+			<h2><?php echo $me['username']; ?></h2>
 		</div>
+		 <?php 
+ 	
+  if (isset($me['id']['Group'])) {
+
+        echo '<div id="connection">';
+ 	 
+        echo $this->Html->link('Se Déconnecter', '/users/logout', array('class'=>'bouton'));
+ 	 	
+        echo '</div>';
+ 	
+     }
+ 
+     else{
+ 	 	
+        echo '<div id="connection">';
+ 	
+       echo $this->Html->link('Inscription', '/users/add');
+ 	        echo'  ';
+ 	 
+        echo $this->Html->link('Se connecter', '/users/login'); 
+ 	 	
+       echo '</div>';
+ 	       }
+ 	 
+      
+ 	 
+       ?>
 		<div id="content">
-			<?php debug($me);?>
+
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
